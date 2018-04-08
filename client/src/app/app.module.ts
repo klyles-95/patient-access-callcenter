@@ -20,6 +20,7 @@ import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service'
 // import { EventService } from './event.service';
 // import { TokenInterceptorService } from './token-interceptor.service';
 
@@ -46,7 +47,7 @@ import { AuthService } from './auth.service';
     HttpClientModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,27 +1,95 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Angular CLI + Bootstrap</a>
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="https://medium.com/@beeman"><i class="fa fa-medium" aria-hidden="true"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/@beeman_nl"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://github.com/beeman"><i class="fa fa-github" aria-hidden="true"></i></a>
+<header id="header">
+  <div id="logo-group">
+
+    <!-- PLACE YOUR LOGO HERE -->
+    <span id="logo"> <img src="assets/images/ascensionLogo.png" alt="SmartAdmin"> </span>
+    <!-- END LOGO PLACEHOLDER -->
+  </div>
+
+
+  <!-- pulled right: nav area -->
+  <div class="pull-right">
+
+    <!-- <sa-collapse-menu></sa-collapse-menu> -->
+
+    <!-- #MOBILE -->
+    <!-- Top menu profile link : this shows only when top menu is active -->
+    <div style="margin-top: 1em">
+      <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+        <li class="">
+          <a class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+           <!--  <img src="assets/images/avatars/sunny.png" alt="John Doe" class="online"/> -->
+           <i class="fa fa-user" aria-hidden="true"></i>
+            {{userName}}
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li>
+              <a (click)="(null)" class="padding-10 padding-top-0 padding-bottom-0"><i
+                class="fa fa-cog"></i> Setting</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a routerLink="/app-views/profile" class="padding-10 padding-top-0 padding-bottom-0"> <i
+                class="fa fa-user"></i>
+                <u>P</u>rofile</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a (click)="(null)" class="padding-10 padding-top-0 padding-bottom-0"
+                 data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a (click)="onFullScreen()" class="padding-10 padding-top-0 padding-bottom-0">
+                <i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#/login" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i
+                class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>
-  </nav>
+
+    <!-- logout button -->
+    <!-- <sa-logout></sa-logout> -->
+    <!-- end logout button -->
+
+    <!-- search mobile button (this is hidden till mobile view port) -->
+    <!-- <div id="search-mobile" class="btn-header transparent pull-right">
+      <span> <a (click)="toggleSearchMobile()" title="Search"><i class="fa fa-search"></i></a> </span>
+    </div> -->
+    <!-- end search mobile button -->
+
+    <!-- input: search field -->
+    <!-- <form #searchForm="ngForm" (ngSubmit)="onSubmit()" class="header-search pull-right">
+      <input id="search-fld" type="text" name="param" required
+             placeholder="Find reports and more">
+      <button type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+      <a id="cancel-search-js" (click)="toggleSearchMobile()" title="Cancel Search"><i class="fa fa-times"></i></a>
+    </form> -->
+    <!-- end input: search field -->
+
+    <!-- fullscreen button -->
+    <!-- <sa-full-screen></sa-full-screen> -->
+    <!-- end fullscreen button -->
+
+    <!-- #Voice Command: Start Speech -->
+    <!-- <sa-speech-button></sa-speech-button> -->
+    <!-- end voice command -->
+
+
+    <!-- multiple lang dropdown : find all flags in the flags page -->
+   <!--  <sa-language-selector></sa-language-selector> -->
+    <!-- end multiple lang -->
+
+
+
+  </div>
+  <!-- end pulled right: nav area -->
+
+</header>
