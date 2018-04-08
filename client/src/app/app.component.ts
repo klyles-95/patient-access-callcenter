@@ -9,6 +9,6 @@ import { AuthService } from './auth.service';
 })
 
 export class AppComponent {
-  title = 'JustCall';
+  title = 'PACC';
   constructor(private _authService: AuthService){}
 }
