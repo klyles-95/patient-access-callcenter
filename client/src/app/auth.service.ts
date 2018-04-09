@@ -24,7 +24,7 @@ export class AuthService {
 
   getUserDetails(username, password) {
     // Post user details to API server and return user info if correct
-    return this.http.post('/api/login', {
+    return this.http.post<myData>('/api/login', {
       username,
       password
     })

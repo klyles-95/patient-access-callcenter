@@ -7,6 +7,7 @@ const PORT = 3000;
 
 mongoose.Promise = global.Promise;
 
+//Connect to Mongoose Databaseg
 mongoose.connect(db)
 .then(() => console.log('Mongodb is up and running'))
 
@@ -21,34 +22,35 @@ app.get('/', (req, res) => {
 app.post('/api/login', async (req, res) => {
     let userData = req.body
    
-    User.findOne({username: userData.username}, (err, user) => {
+    await User.findOne({username: userData.username}, (err, user) => {
         if (err){
             console.log(err)
         } else {
             if (!user) {
-              res.status(401).send('Invalid Username')
+             
+              res.json({
+                  success: false,
+                  message: "Invalid Username"
+              })
             } else 
             if ( user.password !== userData.password) {
-              res.status(401).send('Invalid Password')
+            //   res.status(401).send('Invalid Password')
+              res.json({
+                success: false,
+                message: "Invalid Username"
+            })
+              
             } else {     
-              res.status(200).send(user)
+            //   res.status(200).send(user)
+              res.json({
+                success: true,
+                message: "Logging In"
+            })
             }
         }
     })
 
 })
-
-
-    //const resp = await User.findOne({username, password})
-    // if(!resp){
-    //     //user is incorrect
-    //     console.log("incorrect details")
-    // } else {
-    //     // make a session and set user to logged in
-    //     console.log("logging you in....")
-    // }
-    // console.log(req.body)
-
 
 app.listen(PORT, function(){
     console.log("Server running on localhost:" + PORT);
