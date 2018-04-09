@@ -12,14 +12,14 @@
     </div>
     <div class="modal-body no-padding">
       <!-- <form id="login-form" class="smart-form" > -->
-      <form #loginForm="ngForm" class="smart-form" novalidate="novalidate" (submit)="loginUser($event)">
+      <form class="smart-form" novalidate="novalidate" (submit)="loginUser($event)">
         <fieldset>
           <section>
             <div class="row">
               <label class="label col col-2">Username<span class="text-danger">*</span></label>
               <div class="col col-10">
                 <label class="input"> <i class="icon-append fa fa-user"></i>
-                    <input type="text" class="form-control"  placeholder="Please Enter Your Username" [(ngModel)]="loginUserData.email" name="password" required
+                    <input type="text" id="username" name="username" class="form-control"  placeholder="Please Enter Your Username" [(ngModel)]="loginUserData.username"  required
                     autofocus>
                     
                     <br>
@@ -30,21 +30,16 @@
                    </label>
               </div>
             </div>
-
           </section>
-
           <section>
             <div class="row">
               <label class="label col col-2">Password<span class="text-danger">*</span></label>
               <div class="col col-10">
                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                    <input type="password" name="password"
-                    #password="ngModel" id="password"
-                    placeholder="Password"
-                    required="required"
+                    <input type="password" id="password" name="password" #password="ngModel" id="password" placeholder="Password" required="required"
                     [(ngModel)]="loginUserData.password">
                     <br>
-                    <div *ngIf="password?.errors && (password?.dirty || password?.touched)"
+                    <div *ngIf="password.errors && (password.dirty || password.touched)"
                       class="alert alert-danger animated shake">
                       Please enter your password
                     </div>
@@ -52,14 +47,20 @@
               </div>
             </div>
           </section>
+          <footer>
+            <span class="pull-left"> <span class="text-danger">*</span> <em> Required </em> </span>
+            <button type="submit" value= "submit" class="btn btn-primary">
+                 Sign in
+            </button>
+          </footer>
         </fieldset>
 
-        <footer>
+        <!-- <footer>
           <span class="pull-left"> <span class="text-danger">*</span> <em> Required </em> </span>
           <button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">
                Sign in
               </button>
-        </footer>
+        </footer> -->
       </form>
     </div>
   </div>

@@ -1,27 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const cors = require('cors');
-//const path = require('path');
-
-const PORT = 3000;
-const api = require('./routes/api');
 const app = express();
+const mongoose = require('mongoose')
+const db = "mongodb://test:password@ds111648.mlab.com:11648/justcalldb";
+const PORT = 3000;
 
-app.use(cors());
-// app.use(express.static(path.join(__dirname, 'dist')));
+mongoose.Promise = global.Promise;
 
-app.use(bodyParser.json()); 
+mongoose.connect(db)
+.then(() => console.log('Mongodb is up and running'))
 
-app.use('/api', api);
+const User = require('./models/user')
 
-app.get('/', function(req, res){
-    res.send('Hello from server')
-});
+app.use(bodyParser.json()) 
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
+app.post('/api/login', async(req, res) => {
+    const {username, password} = req.body
+    const res = await User.findOne({username, password})
+    if(!res){
+        //user is incorrect
+        console.log("incorrect details")
+    } else {
+        // make a session and set user to logged in
+        console.log("logging you in....")
+    }
+    console.log(req.body)
+})
 
 app.listen(PORT, function(){
     console.log("Server running on localhost:" + PORT);

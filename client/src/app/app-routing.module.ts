@@ -7,67 +7,36 @@ import { TdiContactDetailComponent } from './callcenter/tdi-contact/tdi-contact-
 import { ClientContactComponent } from './callcenter/client-contact/client-contact.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LogoutComponent } from './logout/logout.component';
 import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
 
-  { 
-    path: '', 
-    redirectTo:'/login',
-    pathMatch:'full'
-
-  },
+ 
   { 
     path: 'login', 
     component: LoginComponent 
   },
-  
   { 
-    path: 'register', 
-    component: RegisterComponent 
-  },
-  { 
-    path: 'dashboard', 
-    canActivate: [AuthGuard],
-    component: DashboardComponent 
-  },
-  { 
-    path: 'callcenter', 
-    canActivate: [AuthGuard],
-    component: CallCenterComponent
-   
-  },
-  { 
-    path: 'client-contact', 
-    canActivate: [AuthGuard],
-    component: ClientContactComponent
-   
-  },
-  { 
-    path: 'tdi-contact', 
-    canActivate: [AuthGuard],
-    component: TdiContactComponent
-   
-  },
-  { 
-    path: 'tdi-contact/tdi-contact-list', 
-    canActivate: [AuthGuard],
-    component: TdiContactListComponent
-   
-  },
-  { 
-    path: 'tdi-contact/tdi-contact-detail', 
-    canActivate: [AuthGuard],
-    component: TdiContactDetailComponent
-   
+    path: 'logout', 
+    component: LogoutComponent 
   },
   { 
     path: 'admin', 
-    component: AdminComponent 
+    component: AdminComponent,
+    canActivate: [AuthGuard] 
   },
-  ];
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent 
+  },
+  { 
+    path: '', 
+    component: HomeComponent 
+  }
+];
  
   
 

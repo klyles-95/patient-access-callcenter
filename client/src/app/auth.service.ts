@@ -2,43 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
 
+interface myData {
+  success: boolean, 
+  message: string
+}
+
 @Injectable()
 export class AuthService {
 
-  private _registerUrl = "http://localhost:3000/api/register";
-  private _loginUrl = "http://localhost:3000/api/login";
+  private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false')  
 
-  private loggedInStatus = JSON.parse(localStorage.getItem('loggedIn' || 'fase'))
-  constructor(private http: HttpClient,
-              private _router: Router) { }
+  constructor(private http: HttpClient) { }
 
-  setLoggedIn(value: boolean){
+  setLoggedIn(value: boolean) {
     this.loggedInStatus = value
     localStorage.setItem('loggedIn', 'true')
   }
-
-  get isLoggedIn(){
-    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString())
-  }
-  
-  registerUser(user) {
-    return this.http.post<any>(this._registerUrl, user)
+  get isLoggedIn() {
+    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString())  
   }
 
-  loginUser(user) {
-    return this.http.post<any>(this._loginUrl, user)
-  }
-
-  logoutUser() {
-    localStorage.removeItem('token')
-    this._router.navigate(['/login'])
-  }
-
-  getToken() {
-    return localStorage.getItem('token')
-  }
-
-  loggedIn() {
-    return !!localStorage.getItem('token')    
+  getUserDetails(username, password) {
+    // Post user details to API server and return user info if correct
+    return this.http.post('/api/login', {
+      username,
+      password
+    })
+    
   }
 }

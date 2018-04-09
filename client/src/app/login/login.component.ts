@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { AuthService } from '../auth.service';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router'
 
 
@@ -13,37 +12,26 @@ import { Router } from '@angular/router'
 
 export class LoginComponent implements OnInit {
 
-  loginUserData = {}
-
-  constructor(private _auth: AuthService,
-              private _router: Router,
-              private user:UserService) { }
+  constructor(private Auth: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
-  // loginUser () {
-  //   this._auth.loginUser(this.loginUserData)
-  //   .subscribe(
-  //     res => {
-  //       localStorage.setItem('token', res.token)
-  //       this._router.navigate(['/dashboard'])
-  //     },
-  //     err => console.log(err)
-  //   ) 
-  // }
+  loginUser(event) {
+    event.preventDefault()
+    const target = event.target
+    const username = target.querySelector('#username').value
+    const password = target.querySelector('#password').value
 
-  loginUser(e) {
-  	e.preventDefault();
-  	console.log(e);
-  	var username = e.target.elements[0].value;
-  	var password = e.target.elements[1].value;
-  	
-  	if(username == 'admin' && password == 'admin') {
-      this.user.setUserLoggedIn();
-      this._router.navigate(['dashboard']);
-      console.log("LOGGED IN");
-  	}
+    this.Auth.getUserDetails(username, password).subscribe(data => {
+      if(data.success) {
+        this.router.navigate(['admin'])
+        this.Auth.setLoggedIn(true)
+      } else {
+        window.alert(data.message)
+      }
+    })
+    console.log(username, password)
   }
-
 }
